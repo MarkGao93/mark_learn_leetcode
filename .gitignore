@@ -1,0 +1,8 @@
+CMakeLists.txt.user
+build/
+build/*
+# bkup/
+common/lib/
+common/bin
+# doc/database/CJ/out
+# *.pyc

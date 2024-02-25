@@ -1,0 +1,15 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+
+PROJECT(MarkLearnLeetCode)
+
+ADD_SUBDIRECTORY(algo_01_backtracking)
+ADD_SUBDIRECTORY(algo_02_greedy)
+ADD_SUBDIRECTORY(algo_03_dynamic_programming)
+ADD_SUBDIRECTORY(data_01_array)
+ADD_SUBDIRECTORY(data_02_hash_table)
+ADD_SUBDIRECTORY(data_03_string)
+ADD_SUBDIRECTORY(data_04_linked_list)
+ADD_SUBDIRECTORY(data_05_stack_and_queue)
+ADD_SUBDIRECTORY(data_06_binary_tree)
+ADD_SUBDIRECTORY(skill_01_dichotomy)
+ADD_SUBDIRECTORY(skill_02_double_pointer)
