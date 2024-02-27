@@ -21,10 +21,17 @@ int dichotomy_main() {
     leetcode_704();  // simple
     leetcode_35();  // simple
     leetcode_34();  // medium
-    leetcode_74();  // medium
+
     // need optimization
-    leetcode_33();  // medium
+    leetcode_74();  // medium
+    
+    // need double check the logic though leetcode passed    
     leetcode_153();  // medium
+
+    // need double check the logic though leetcode passed    
+    leetcode_33();  // medium
+    
+
     leetcode_4();  // hard
 
     // Carl suggested dichotomy questions
@@ -361,15 +368,159 @@ void leetcode_74() {
 }
 
 
-void leetcode_33() {
-
-
-}
-
-
 void leetcode_153() {
+    cout << endl << "leetcode_153" << endl;
+    // 寻找旋转排序数组中的最小值
+    // type: medium
+    // 已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。
+    // 例如，原数组 nums = [0,1,2,4,5,6,7] 在变化后可能得到：
+    // 若旋转 4 次，则可以得到 [4,5,6,7,0,1,2]
+    // 若旋转 7 次，则可以得到 [0,1,2,4,5,6,7]
+    // 注意，数组 [a[0], a[1], a[2], ..., a[n-1]] 旋转一次 的结果为数组 [a[n-1], a[0], a[1], a[2], ..., a[n-2]] 。
+    // 给你一个元素值 互不相同 的数组 nums ，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。
+    // 请你找出并返回数组中的 最小元素 。
+    // 你必须设计一个时间复杂度为 O(log n) 的算法解决此问题。
+    // 示例
+    // 输入: nums = [3,4,5,1,2]
+    // 输出: 1
+    // url: https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/description/?envType=study-plan-v2&envId=top-100-liked
+
+    class Solution {
+    public:
+        int findMin(vector<int>& nums) {
+            if (nums.size() == 1) {return nums[0];}
+            if (nums.size() == 2) {
+                if (nums[0] < nums[1]) {
+                    return nums[0];
+                } else {
+                    return nums[1];
+                }
+            }
+            // 二分法找到数据中的最小元素所在的index
+            int index_first = 0;  // to indicate the index of the smallest number
+            int left = 0;
+            int right = nums.size() - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] < nums[0]) {  
+                    right = mid - 1;                
+                } else {
+                    left = mid + 1;
+                }
+                if (mid == 0) {right += 1;}
+                index_first = left;
+            }
+            // 处理情况1：最小元素在第一个，即增序数组
+            if (left >= nums.size()) {return nums[0];}
+            // 处理情况2：最小元素在第二个，即 k=n-1
+            if (right < 0) {index_first = nums.size() - 1;}
+
+            return nums[index_first];
+        }
+    };
 
 }
+
+
+void leetcode_33() {
+    cout << endl << "leetcode_33" << endl;
+    // 搜索旋转排序数组
+    // type: medium
+    // 整数数组 nums 按升序排列，数组中的值 互不相同 。
+    // 在传递给函数之前，nums 在预先未知的某个下标 k（0 <= k < nums.length）上进行了 旋转，
+    // 使数组变为 [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]（下标 从 0 开始 计数）。
+    // 例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2] 。
+    // 给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。
+    // 你必须设计一个时间复杂度为 O(log n) 的算法解决此问题。
+    // 示例
+    // 输入: nums = [4,5,6,7,0,1,2], target = 0
+    // 输出: 4
+    // url: https://leetcode.cn/problems/search-in-rotated-sorted-array/description/?envType=study-plan-v2&envId=top-100-liked
+
+    class Solution {
+    public:
+        int search(vector<int>& nums, int target) {
+            // 第一个二分法找到数据中的最小元素所在的index
+            int index_first = 0;  // to indicate the index of the smallest number
+            int left = 0;
+            int right = nums.size() - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] > nums[0]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+                index_first = left;
+            }
+            // 处理情况1：最小元素在第一个，即增序数组
+            if (left >= nums.size()) {index_first = 0;}
+            // 处理情况2：最小元素在第二个，即 k=n-1
+            if (right < 0) {index_first = nums.size() - 1;}
+            // 处理情况3：目标值为最小元素
+            if (target == nums[index_first]) {return index_first;}
+
+            // 第二个二分法，在数据的后半部分（即较小的部分）进行二分搜索      
+            if (target < nums[0]) {                      
+                int left_1;
+                int right_1 = nums.size() - 1;
+                // 处理情况2
+                if (index_first == (nums.size() - 1)) {
+                    left_1 = 1;
+                } else {
+                    left_1 = index_first;
+                }
+                while (left_1 <= right_1) {
+                    int mid = left_1 + (right_1 - left_1) / 2;
+                    if (nums[mid] > target) {
+                        right_1 = mid - 1;                    
+                    } else if (nums[mid] < target) {
+                        left_1 = mid + 1;
+                    } else {
+                        return mid;
+                    }
+                }
+                // 未找到元素
+                return -1;
+            } else if (target > nums[0]) { // 第三个二分法，在数据的前半部分（即较大的部分）进行二分搜索                
+                int left_2 = 0;
+                int right_2;
+                // 处理情况1
+                if (index_first == 0) {
+                    right_2 = nums.size() - 1;
+                } else {
+                    right_2 = index_first - 1;
+                }                        
+                while (left_2 <= right_2) {
+                    int mid = left_2 + (right_2 - left_2) / 2;
+                    if (nums[mid] > target) {
+                        right_2 = mid - 1;
+                    } else if (nums[mid] < target) {                    
+                        left_2 = mid + 1;
+                    } else {
+                        return mid;
+                    }
+                }
+                // 未找到元素
+                return -1;
+            } else {
+                // 处理情况4：目标值为数组首个元素
+                return 0;
+            }
+        }
+    };
+
+    vector<int> nums = {4,5,6,7,0,1,2};
+    int target = 5;
+
+    Solution var33;
+    bool ret = var33.search(nums, target);
+    cout << "leetcode_33 expected result is 1 !" << endl;
+    cout << "ret = " << ret << endl;
+}
+
+
+
 
 
 void leetcode_4() {

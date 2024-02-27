@@ -2,6 +2,8 @@
     "files.associations": {
         "ostream": "cpp",
         "vector": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "array": "cpp",
+        "initializer_list": "cpp"
     }
 }
