@@ -5,12 +5,12 @@
 #include <algorithm>
 #include <queue>
 // #include <unordered_set>
-// #include <unordered_map>
+#include <unordered_map>
 using std::vector;
 using std::string;
 // using std::unordered_set;
-// using std::unordered_map;
-// using std::pair;
+using std::unordered_map;
+using std::pair;
 // using std::sort;
 using std::swap;
 // using std::reverse;
@@ -30,6 +30,7 @@ void leetcode_202();
 void leetcode_1();
 
 void leetcode_454();
+void leetcode_383();
 
 void leetcode_15();
 

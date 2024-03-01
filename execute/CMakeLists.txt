@@ -14,6 +14,7 @@ TARGET_LINK_LIBRARIES(
     skill_01_dichotomy
     data_02_hash_table
     data_03_string
+    data_04_linked_list
     # dbc 
     # can 
     # rte 

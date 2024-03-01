@@ -4,9 +4,8 @@
 #include "dichotomy.h"
 #include "hash_table.h"
 #include "data_string.h"
-// #include "mainWindow.h"
-// #include <QApplication>
-// #include "lateralController.h"
+#include "linked_list.h"
+
 
 // static void sighand(int sig)
 // {
@@ -35,7 +34,8 @@ int main(int argc, char *argv[])
 	int ret = array_main();
     // ret = dichotomy_main();
     // ret = hash_table_main();
-    ret = data_string_main();
+    // ret = data_string_main();
+    ret = linked_list_main();
 
 
 
