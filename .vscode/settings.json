@@ -4,6 +4,10 @@
         "vector": "cpp",
         "string": "cpp",
         "array": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp"
     }
 }

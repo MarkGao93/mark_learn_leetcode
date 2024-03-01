@@ -2,6 +2,8 @@
 #include "common.h"
 #include "array.h"
 #include "dichotomy.h"
+#include "hash_table.h"
+#include "data_string.h"
 // #include "mainWindow.h"
 // #include <QApplication>
 // #include "lateralController.h"
@@ -31,15 +33,12 @@ int main(int argc, char *argv[])
     cout<<endl;
 
 	int ret = array_main();
-    ret = dichotomy_main();
-//    aegis_run(argc, argv);
-    // aegis_run();
+    // ret = dichotomy_main();
+    // ret = hash_table_main();
+    ret = data_string_main();
 
 
-    // QApplication a(argc, argv);
-    // MainWindow w;
-    // w.show();
-    // return a.exec();
+
 
 //    while(1)
 //    {

@@ -11,7 +11,9 @@ ADD_EXECUTABLE(marklearnleetcode main.cpp)
 TARGET_LINK_LIBRARIES(
     marklearnleetcode 
     data_01_array
-    skill_01_dichotomy 
+    skill_01_dichotomy
+    data_02_hash_table
+    data_03_string
     # dbc 
     # can 
     # rte 
