@@ -336,8 +336,11 @@ void linked_list_leetcode() {
     leetcode_142();  // 环形链表II, medium, Hot100
 
     // LeetCode Hot 100
+    // leetcode_160();  // 相交链表, simple, Hot100
+    // leetcode_206();  // 反转链表, simple, Hot100
     leetcode_234();  // 回文链表, simple, Hot100
     leetcode_141();  // 环形链表, simple, Hot100
+    // leetcode_142();  // 环形链表II, medium, Hot100
     leetcode_21();  // 合并两个有序链表, simple, Hot100, Classic150
 
     // LeetCode Classic 150
@@ -1126,16 +1129,15 @@ void leetcode_141() {
         // 方法一：双指针法
         // 具体分析过程见142
         bool hasCycle1(ListNode* head) {
-            if (head != nullptr && head->next != nullptr) {return false;}
-            ListNode* fast = head;
+            if (head == nullptr || head->next == nullptr) {return false;}
             ListNode* slow = head;
+            ListNode* fast = head->next;
             while (slow != fast) {
-                if (fast == nullptr || head->next == nullptr) {return false;}
+                if (fast == nullptr || fast->next == nullptr) {return false;}
                 fast = fast->next->next;
                 slow = slow->next;
             }
             return true;
-            
         }
         // 时间复杂度：O(n)
         // 空间复杂度：O(1)
