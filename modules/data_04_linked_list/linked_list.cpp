@@ -143,6 +143,7 @@ public:
 
     // 两两交换节点
     void swapPairs() {
+        // 迭代法
         // 步骤一，cur指向next的next
         // 步骤二，next的next指向next
         // 步骤三，next指向next的next的next
@@ -162,6 +163,7 @@ public:
     
     // 删除倒数第N个节点
     void removeNthFromEnd(int n) {
+        // 双指针法
         LinkedNode* fast = _dummyHead;
         LinkedNode* slow = _dummyHead;
         while (n-- && fast != nullptr) {
@@ -181,6 +183,7 @@ public:
 
     // 判断链表是否有环
     bool detectCycle() {
+        // set哈希法
         unordered_set<LinkedNode*> visited;
         LinkedNode* cur = _dummyHead->next;
         while (cur != nullptr) {
@@ -195,6 +198,7 @@ public:
 
     // 判断链表是否为回文链表
     bool isPalindrome() {
+        // 数组判断法
         LinkedNode* cur  = _dummyHead->next;
         int length = 0;
         while (cur) {
@@ -246,6 +250,12 @@ void leetcode_142();
 void leetcode_234();
 void leetcode_141();
 void leetcode_21();
+void leetcode_2();
+void leetcode_25();
+void leetcode_138();
+void leetcode_148();
+void leetcode_23();
+void leetcode_146();
 
 // LeetCode Classic 150
 
@@ -342,6 +352,14 @@ void linked_list_leetcode() {
     leetcode_141();  // 环形链表, simple, Hot100
     // leetcode_142();  // 环形链表II, medium, Hot100
     leetcode_21();  // 合并两个有序链表, simple, Hot100, Classic150
+    leetcode_2();  // 两数相加, medium, Hot100, Classic150
+    // leetcode_19();  // 删除链表的倒数第N个节点, medium, Hot100, Classic150
+    // leetcode_24();  // 两两交换链表中的节点, medium, Hot100
+    leetcode_25();  // K个一组翻转链表, hard, Hot100, Classic150
+    leetcode_138();
+    leetcode_148();
+    leetcode_23();
+    leetcode_146();
 
     // LeetCode Classic 150
     
@@ -1233,3 +1251,91 @@ void leetcode_21() {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+// 两数相加, medium, Hot100, Classic150
+///////////////////////////////////////////////////////////////////////////////
+void leetcode_2() {
+    cout << endl << "leetcode_2" << endl;    
+    // 给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，
+    // 并且每个节点只能存储 一位 数字。
+    // 请你将两个数相加，并以相同形式返回一个表示和的链表。
+    // 你可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+    // 输入: l1 = [2,4,3], l2 = [5,6,4]
+    // 输出：[7,0,8]
+    // 解释：342 + 465 = 807.
+    // leetcode: https://leetcode.cn/problems/add-two-numbers/description/?envType=study-plan-v2&envId=top-100-liked
+
+    class Solution {
+    public:
+        struct ListNode {
+            int val;
+            ListNode *next;
+            ListNode() : val(0), next(nullptr) {}
+            ListNode(int x) : val(x), next(nullptr) {}
+            ListNode(int x, ListNode *next) : val(x), next(next) {}
+        };
+
+        // 方法一：模拟法
+        // 我们同时遍历两个链表，逐位计算它们的和，并与当前位置的进位值相加。
+        // 如果两个链表的长度不同，则可以认为长度短的链表的后面有若干个 0 。
+        // 此外，如果链表遍历结束后，有 carry>0，还需要在答案链表的后面附加一个节点，节点的值为 carry。
+        ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+            int carry = 0;
+            ListNode* head = nullptr, * tail = nullptr;
+            while (l1 || l2) {
+                int val1 = l1 == nullptr ? 0 : l1->val;
+                int val2 = l2 == nullptr ? 0 : l2->val;
+                int sum = val1 + val2 + carry;
+                if (!head) {
+                    head = tail = new ListNode(sum % 10);
+                } else {
+                    tail->next = new ListNode(sum % 10);
+                    tail = tail->next;
+                }
+                carry = sum / 10;
+                if (l1 != nullptr) l1 = l1->next;
+                if (l2 != nullptr) l2 = l2->next;
+            }
+            if (carry > 0) {
+                tail->next = new ListNode(carry);
+            }
+            return head;
+        }
+        // 时间复杂度：O(max(m+n))
+        // 空间复杂度：O(1)
+    };
+
+    cout << "please test the function in leetcode" << endl;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// K个一组翻转链表, hard, Hot100, Classic150
+///////////////////////////////////////////////////////////////////////////////
+void leetcode_25() {
+    cout << endl << "leetcode_25" << endl;    
+    // 给你链表的头节点 head ，每 k 个节点一组进行翻转，请你返回修改后的链表。
+    // k 是一个正整数，它的值小于或等于链表的长度。
+    // 如果节点总数不是 k 的整数倍，那么请将最后剩余的节点保持原有顺序。
+    // 你不能只是单纯的改变节点内部的值，而是需要实际进行节点交换。
+    // 输入: head = [1,2,3,4,5], k = 3
+    // 输出：[3,2,1,4,5]
+    // leetcode: https://leetcode.cn/problems/reverse-nodes-in-k-group/description/?envType=study-plan-v2&envId=top-100-liked
+
+    class Solution {
+    public:
+        struct ListNode {
+            int val;
+            ListNode *next;
+            ListNode() : val(0), next(nullptr) {}
+            ListNode(int x) : val(x), next(nullptr) {}
+            ListNode(int x, ListNode *next) : val(x), next(next) {}
+        };
+    };
+}
+
+
+void leetcode_138() {}
+void leetcode_148() {}
+void leetcode_23() {}
+void leetcode_146() {}
