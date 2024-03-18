@@ -5,6 +5,9 @@
 #include "hash_table.h"
 #include "data_string.h"
 #include "linked_list.h"
+#include "my_stack.h"
+#include "my_queue.h"
+#include "dynamic_programming.h"
 
 
 // static void sighand(int sig)
@@ -35,8 +38,8 @@ int main(int argc, char *argv[])
     // ret = dichotomy_main();
     // ret = hash_table_main();
     // ret = data_string_main();
-    ret = linked_list_main();
-
+    // ret = linked_list_main();
+    ret = dynamic_programming_main();
 
 
 

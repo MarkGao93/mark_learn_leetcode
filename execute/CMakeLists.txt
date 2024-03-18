@@ -15,6 +15,9 @@ TARGET_LINK_LIBRARIES(
     data_02_hash_table
     data_03_string
     data_04_linked_list
+    data_05_stack_and_queue
+    data_06_binary_tree
+    algo_03_dynamic_programming
     # dbc 
     # can 
     # rte 
